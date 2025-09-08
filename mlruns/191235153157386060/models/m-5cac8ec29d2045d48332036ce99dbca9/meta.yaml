@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/syedm/OneDrive/ChurnBuster%20%E2%80%94%20Predictive%20Churn%20Scoring%20%2B%20Targeted%20Retention%20Engine/churnbuster/mlruns/191235153157386060/models/m-5cac8ec29d2045d48332036ce99dbca9/artifacts
+creation_timestamp: 1757321260118
+experiment_id: '191235153157386060'
+last_updated_timestamp: 1757321279853
+model_id: m-5cac8ec29d2045d48332036ce99dbca9
+model_type: null
+name: xgb_model
+source_run_id: 643301038caf46f8ac88afe55e1a1425
+status: 2
+status_message: null
