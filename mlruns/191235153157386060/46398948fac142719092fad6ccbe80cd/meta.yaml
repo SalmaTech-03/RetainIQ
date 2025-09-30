@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/syedm/OneDrive/ChurnBuster%20%E2%80%94%20Predictive%20Churn%20Scoring%20%2B%20Targeted%20Retention%20Engine/churnbuster/mlruns/191235153157386060/46398948fac142719092fad6ccbe80cd/artifacts
+end_time: 1759240861666
+entry_point_name: ''
+experiment_id: '191235153157386060'
+lifecycle_stage: active
+run_id: 46398948fac142719092fad6ccbe80cd
+run_name: stately-crow-167
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759240841676
+status: 3
+tags: []
+user_id: syedm

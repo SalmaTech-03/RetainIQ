@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/syedm/OneDrive/ChurnBuster%20%E2%80%94%20Predictive%20Churn%20Scoring%20%2B%20Targeted%20Retention%20Engine/churnbuster/mlruns/191235153157386060/d6eb06c14eaf4da19fc6bb9382211f83/artifacts
+end_time: 1759242884874
+entry_point_name: ''
+experiment_id: '191235153157386060'
+lifecycle_stage: active
+run_id: d6eb06c14eaf4da19fc6bb9382211f83
+run_name: selective-gull-995
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759242874598
+status: 3
+tags: []
+user_id: syedm

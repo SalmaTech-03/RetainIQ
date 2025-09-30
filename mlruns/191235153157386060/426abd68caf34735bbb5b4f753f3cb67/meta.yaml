@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/syedm/OneDrive/ChurnBuster%20%E2%80%94%20Predictive%20Churn%20Scoring%20%2B%20Targeted%20Retention%20Engine/churnbuster/mlruns/191235153157386060/426abd68caf34735bbb5b4f753f3cb67/artifacts
+end_time: 1759244358226
+entry_point_name: ''
+experiment_id: '191235153157386060'
+lifecycle_stage: active
+run_id: 426abd68caf34735bbb5b4f753f3cb67
+run_name: dashing-skink-797
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1759244348864
+status: 3
+tags: []
+user_id: syedm

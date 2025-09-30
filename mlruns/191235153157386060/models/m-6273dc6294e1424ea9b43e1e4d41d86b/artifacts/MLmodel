@@ -1,0 +1,22 @@
+artifact_path: file:///C:/Users/syedm/OneDrive/ChurnBuster%20%E2%80%94%20Predictive%20Churn%20Scoring%20%2B%20Targeted%20Retention%20Engine/churnbuster/mlruns/191235153157386060/models/m-6273dc6294e1424ea9b43e1e4d41d86b/artifacts
+flavors:
+  python_function:
+    data: model.xgb
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.xgboost
+    python_version: 3.10.9
+  xgboost:
+    code: null
+    data: model.xgb
+    model_class: xgboost.sklearn.XGBClassifier
+    model_format: xgb
+    xgb_version: 3.0.4
+mlflow_version: 3.3.2
+model_id: m-6273dc6294e1424ea9b43e1e4d41d86b
+model_size_bytes: 236008
+model_uuid: m-6273dc6294e1424ea9b43e1e4d41d86b
+prompts: null
+run_id: d6eb06c14eaf4da19fc6bb9382211f83
+utc_time_created: '2025-09-30 14:34:35.236127'
