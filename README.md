@@ -1,142 +1,174 @@
+RetainIQ: Autonomous Churn Defense Engine
+Predictive Analytics | Targeted Intervention | Revenue Retention
+Executive Summary
 
-#  RetainIQ: The Autonomous Churn Defense Engine
-### *Predict. Intervene. Retain.*
+RetainIQ is an end-to-end Customer Retention Intelligence System engineered to mitigate revenue attrition within high-volume subscription environments.
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
-[![XGBoost](https://img.shields.io/badge/ML-XGBoost-orange?style=for-the-badge&logo=xgboost&logoColor=white)](https://xgboost.readthedocs.io/)
-[![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-[![Streamlit](https://img.shields.io/badge/UI-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![Docker](https://img.shields.io/badge/Deploy-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![MLflow](https://img.shields.io/badge/Ops-MLflow-0194E2?style=for-the-badge&logo=mlflow&logoColor=white)](https://mlflow.org/)
+Moving beyond traditional binary classification, RetainIQ utilizes Causal Inference (Uplift Modeling) to distinguish between predicted churn and actionable intervention. By identifying the specific uplift potential of a customer, the system optimizes resource allocation, ensuring retention efforts are directed only toward cohorts where intervention will yield a positive ROI. The architecture integrates high-performance Gradient Boosting with a containerized microservice framework to support real-time enterprise deployment.
 
----
-
-##  Executive Summary
-
-**RetainIQ** is an end-to-end **Customer Retention Intelligence System** designed to solve the billion-dollar problem of customer churn in the telecom sector. 
-
-Unlike traditional models that only predict *who* will leave, RetainIQ leverages **Causal Inference (Uplift Modeling)** to identify *who can be saved*. It combines state-of-the-art Gradient Boosting for risk scoring with a microservice architecture for real-time deployment. From raw data ingestion to a sleek Streamlit dashboard, RetainIQ demonstrates the full lifecycle of a modern Machine Learning product.
-
----
-
-##  The Tech Stack
-
-| Domain | Tech Stack | Role in RetainIQ |
-| :--- | :--- | :--- |
-| **Machine Learning** | `XGBoost`, `Scikit-Learn` | High-performance classification and feature pipelines. |
-| **Causal Inference** | `Uplift Modeling` | Dual-model architecture to estimate treatment effects. |
-| **API & Backend** | `FastAPI`, `Uvicorn` | Asynchronous REST API for real-time inference. |
-| **DevOps & MLOps** | `Docker`, `MLflow` | Containerization and experiment tracking/registry. |
-| **Visualization** | `Streamlit`, `Matplotlib` | Interactive dashboards and statistical plotting. |
-
----
-
-## System Architecture
-
-```mermaid
+Technical Stack
+Domain	Technology	Implementation Role
+Machine Learning	XGBoost, Scikit-Learn	Gradient-boosted decision trees and automated feature pipelines.
+Causal Inference	Uplift Modeling	Dual-model T-Learner architecture for treatment effect estimation.
+Backend Architecture	FastAPI, Uvicorn	Asynchronous REST API for high-concurrency inference.
+MLOps & DevOps	Docker, MLflow	Containerization, experiment tracking, and model registry.
+Data Visualization	Streamlit, Matplotlib	Analytical dashboards for executive reporting and model monitoring.
+System Architecture
+code
+Mermaid
+download
+content_copy
+expand_less
 graph TD
-    subgraph "Data & Engineering"
-    A[Raw CSV Data] --> B(Data Ingestion)
-    B --> C{Feature Pipeline}
-    C -->|OneHot + Scaling| D[Processed Features]
+    subgraph "Data Engineering Layer"
+    A[Raw Data Ingestion] --> B(Validation Pipeline)
+    B --> C{Feature Engineering}
+    C -->|Transformation & Scaling| D[Processed Feature Sets]
     end
 
-    subgraph "The Brain (Training)"
+    subgraph "Analytical Engine"
     D --> E[XGBoost Classifier]
     D --> F[Uplift T-Learner]
-    E --> G((MLflow Registry))
+    E --> G((MLflow Model Registry))
     F --> G
     end
 
-    subgraph "Production Layer"
-    G -->|Load Artifacts| H[FastAPI Microservice]
-    H --> I[Docker Container]
-    I --> J[Streamlit Dashboard]
+    subgraph "Deployment Layer"
+    G -->|Artifact Retrieval| H[FastAPI Service]
+    H --> I[Docker Containerization]
+    I --> J[Streamlit Interface]
     end
-```
+Methodology Matrix
 
----
+RetainIQ employs a rigorous analytical framework transitioning from descriptive data processing to prescriptive causal modeling.
 
-##  The Methodology Matrix
+Domain	Technique	Implementation Details	Strategic Impact
+Feature Engineering	Scikit-Learn Pipelines	Utilizes ColumnTransformers for heterogeneous data; One-Hot Encoding for categorical variables; StandardScaler for normalization.	Eliminates data leakage and ensures a reproducible transformation schema for production-grade inference.
+Predictive Modeling	XGBoost Classifier	Objective: binary:logistic. Optimized via Log Loss. Imbalance handled via dynamic scale_pos_weight adjustments.	Generates high-precision churn probability scores (
+𝑃
+(
+𝐶
+ℎ
+𝑢
+𝑟
+𝑛
+)
+P(Churn)
+) to serve as a primary risk filter.
+Causal Inference	Two-Model Uplift (T-Learner)	Independent learners for Treatment (
+𝑇
+=
+1
+T=1
+) and Control (
+𝑇
+=
+0
+T=0
+) groups to estimate counterfactuals.	Isolates "Persuadables" from "Lost Causes," ensuring retention budget is directed toward incremental revenue gain.
+Statistical Rigor	Power Analysis	Cohen’s h Effect Size calculation; 
+𝛼
+=
+0.05
+α=0.05
+, Power (
+1
+−
+𝛽
+1−β
+) 
+=
+0.80
+=0.80
+, MDE 
+=
+5
+%
+=5%
+.	Validates that retention campaign results are statistically significant and actionable for executive decision-making.
+MLOps Architecture	Containerized Microservices	Multi-stage Docker builds; MLflow for versioning and hyperparameter tracking.	Facilitates seamless integration into existing IT infrastructure with minimal environment friction.
+Causal Analysis: Uplift Modeling
 
-RetainIQ employs a multi-layered analytical approach, moving from **descriptive** data processing to **predictive** risk scoring, and finally to **prescriptive** causal inference.
+A critical deficiency in standard churn models is the inability to account for the "treatment effect." RetainIQ utilizes a counterfactual framework to calculate the Individual Treatment Effect (ITE):
 
-| **Domain** | **Algorithm / Technique** | **Implementation Details** | **Strategic Impact** |
-| :--- | :--- | :--- | :--- |
-| ** Feature Engineering** | **Scikit-Learn Pipelines** | • `ColumnTransformer` for heterogeneous data.<br>• **One-Hot Encoding** for high-cardinality categorical variables.<br>• **StandardScaler** for numeric normalization.<br>• Custom Imputation strategies for missing `TotalCharges`. | Ensures data leakage prevention and creates a robust, reproducible transformation schema for production inference. |
-| ** Predictive Modeling** | **XGBoost Classifier** | • **Objective:** `binary:logistic`<br>• **Loss Function:** Log Loss (Cross-Entropy).<br>• **Imbalance Handling:** `scale_pos_weight` optimized dynamically based on class distribution.<br>• **Evaluation:** ROC-AUC (Discrimination) & Brier Score (Calibration). | Delivers high-precision churn probability scores ($P(Churn)$), acting as the primary filter for risk identification. |
-| ** Causal Inference** | **Two-Model Uplift (T-Learner)** | • **Architecture:** Independent XGBoost learners for Treatment ($T=1$) and Control ($T=0$) groups.<br>• **Scoring:** Calculates **Uplift Score** $\tau = P(Y|X, T=1) - P(Y|X, T=0)$.<br>• **Segmentation:** Isolates "Persuadables" from "Lost Causes" and "Sleeping Dogs". | Transforms the system from *passive prediction* to *active intervention*, ensuring budget is spent only where it generates incremental revenue. |
-| ** Statistical Rigor** | **Power Analysis & A/B Design** | • **Method:** Cohen’s *h* Effect Size calculation.<br>• **Parameters:** $\alpha=0.05$, Power ($1-\beta$) $= 0.80$, MDE $= 5\%$.<br>• **Sample Calculation:** Determined required $N=1,565$ per arm. | Guarantees that the results of the retention campaign are statistically significant and not due to random chance. |
-| ** MLOps Architecture** | **Containerized Microservices** | • **Model Serving:** FastAPI asynchronous endpoints.<br>• **Artifact Management:** MLflow for versioning models (`.joblib`) and tracking hyperparameters.<br>• **Virtualization:** Docker multi-stage builds for lean production images. | Enables "write once, deploy anywhere" capability, decoupling the DS environment from the production IT stack. |
+Uplift Score
+=
+𝑃
+(
+Churn
+∣
+Control
+)
+−
+𝑃
+(
+Churn
+∣
+Treatment
+)
+Uplift Score=P(Churn∣Control)−P(Churn∣Treatment)
 
----
+Strategic Segmentation:
 
-###  Deep Dive: Uplift Modeling
-While most churn models stop at "Who will leave?", **RetainIQ** asks "Who can we *save*?". We utilized a **Two-Model Approach** to simulate counterfactuals:
+Persuadables (High Uplift): Customers who respond positively to intervention. These are the primary targets for retention offers.
 
-$$ \text{Uplift Score} = P(\text{Churn}|\text{No Offer}) - P(\text{Churn}|\text{Offer}) $$
+Lost Causes (Zero Uplift): Customers likely to churn regardless of intervention. Resource allocation to this group is minimized to reduce waste.
 
-1.  **Positive Uplift (Persuadables):** Customers who stay *only* if treated. **(Target These)**
-2.  **Zero Uplift (Lost Causes):** Customers who leave regardless of the offer. **(Save Budget)**
-3.  **Negative Uplift (Sleeping Dogs):** Customers triggered to leave *by* the offer. **(Do Not Disturb)**
+Sleeping Dogs (Negative Uplift): Customers for whom intervention may trigger a churn event. These individuals are excluded from all outreach.
 
----
+Deployment and Execution
+Containerized Deployment
 
-##  Quick Start Guide
+To deploy the prediction engine as a microservice:
 
-### Option 1: Docker Deployment (Recommended)
-Launch the entire prediction engine in an isolated container.
-
-```bash
-# 1. Build the image
+code
+Bash
+download
+content_copy
+expand_less
+# Build the production image
 docker build -t retainiq-api .
 
-# 2. Run the container
+# Initialize the containerized service
 docker run -p 8001:8001 retainiq-api
-```
-*The API is now live at `http://localhost:8001/predict`*
 
-### Option 2: Local Development
-```bash
-# 1. Install dependencies
+API documentation and endpoints are accessible at port 8001.
+
+Local Development Environment
+code
+Bash
+download
+content_copy
+expand_less
+# Install required dependencies
 pip install -r requirements.txt
 
-# 2. Run the Streamlit Dashboard
+# Execute the reporting interface
 streamlit run src/streamlit_app.py
-```
+Performance Benchmarking
 
----
+Model Discrimination: The XGBoost Classifier achieved an ROC AUC of 0.8187 on hold-out test sets.
 
-## Performance & Results
+Targeting Precision: Uplift modeling identified that focusing on the top 20% of the customer base yields 3x the retention efficiency compared to non-targeted outreach.
 
-*   **Model Precision:** XGBoost Classifier achieved an **ROC AUC of 0.8187**.
-*   **Targeting Efficiency:** The Uplift Model identified that targeting the top 2 deciles of customers yields **3x higher retention** than random targeting.
-*   **Risk Segmentation:** The API successfully segments users into High, Medium, and Low risk bands with <100ms latency.
+Latency: The FastAPI inference endpoint maintains a response time of <100ms, supporting real-time operational workflows.
 
----
-
-##  Repository Structure
-
-```text
+Project Structure
+code
+Text
+download
+content_copy
+expand_less
 RetainIQ/
-├── .github/workflows/   # CI/CD Pipelines
-├── data/                # Raw & Processed Data
-├── docs/                # A/B Test Plans & Guides
-├── mlruns/              # MLflow Experiment Logs
-├── models/              # Serialized Models (.joblib)
-├── notebooks/           # Jupyter Labs (EDA, Uplift)
-├── src/                 # Source Code
-│   ├── app.py           # FastAPI Application
-│   ├── features.py      # Engineering Pipelines
-│   ├── train.py         # Training Script
-│   └── streamlit_app.py # UI Dashboard
-├── Dockerfile           # Container Config
-└── requirements.txt     # Dependencies
-```
-
----
-
-<p align="center">
-  <sub>Built with 💙 by SalmaTech-03.</sub>
-</p>
-
+├── .github/workflows/   # Continuous Integration pipelines
+├── data/                # Ingested and curated datasets
+├── docs/                # Statistical plans and technical documentation
+├── mlruns/              # MLflow metadata and experiment tracking
+├── models/              # Serialized model artifacts (.joblib)
+├── src/                 # Core Source Code
+│   ├── app.py           # FastAPI implementation
+│   ├── features.py      # Feature engineering logic
+│   ├── train.py         # Model training and validation
+│   └── streamlit_app.py # Executive dashboard
+├── Dockerfile           # Environment virtualization
+└── requirements.txt     # System dependencies
